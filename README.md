@@ -1,2 +1,2 @@
-# TS-base
-My base project for TypeScript.
+# SimpleFileServer
+フロント練習用のファイルサーバー。
