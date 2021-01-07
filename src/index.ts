@@ -6,7 +6,7 @@ const port = 8888
 const server = http.createServer((req: IncomingMessage, res: ServerResponse) => {
     
     const path: string = toFilePath(req.url)
-    console.log(req.url)
+    console.log(`${req.url}(${path}にフォワード)`)
 
     fs.readFile('./statics' + path, (err, data) => {
         if (err) {
