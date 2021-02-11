@@ -1,6 +1,7 @@
 import http, { IncomingMessage, ServerResponse } from 'http'
 import * as fs from 'fs'
 import mime from 'mime-types'
+import settings from '../settings/setting.json'
 
 const port = 8888
 
@@ -9,7 +10,7 @@ const server = http.createServer((req: IncomingMessage, res: ServerResponse) => 
     const path: string = toFilePath(req.url)
     console.log(`${req.url}(${path}にフォワード)`)
 
-    fs.readFile('./statics' + path, (err, data) => {
+    fs.readFile(settings.webContentDir + path, (err, data) => {
         if (err) {
             console.log(err)
             res.writeHead(500, { 'Content-Type': 'text/plain' })
@@ -27,6 +28,7 @@ const server = http.createServer((req: IncomingMessage, res: ServerResponse) => 
 
 server.listen(port)
 console.log(`Server has started (PORT:${port.toString()}).`)
+console.log(`WebContent: ${settings.webContentDir}`)
 
 function toFilePath(url: string | undefined): string {
     if (typeof url === 'undefined') {
